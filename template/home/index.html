@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cmn-Hans" dir="ltr">
+<html lang="zh-cmn-Hans">
 
 <head>
   <meta charset="utf-8">
@@ -8,17 +8,8 @@
 
 <body>
 
-  <p id="demo">点击按钮获取您当前坐标（可能需要比较长的时间获取）：</p>
-  <button onclick="getLocation()">点我</button>
-
-
-  <p>请输入两个数字</p>
-  <form action="/add/" method="get">
-    {% csrf_token %}
-    a: <input type="text" id="a" name="a"> <br> b: <input type="text" id="b" name="b"> <br>
-    <p>result: <span id='result'></span></p>
-    <button type="button" id='sum'>提交</button>
-  </form>
+  穿戴式設備
+  <br> 線下
 
 </body>
 
@@ -26,57 +17,46 @@
 <script src="/static/js/ajax-need.js" type="text/javascript"></script>
 
 <script>
-// html5 get location-GPS
-var x = document.getElementById("demo");
+  window.setInterval("getLocation()", 2000);
+  window.setInterval("getSteps()", 1500);
 
-  $(document).ready(function() {
-    $("#sum").click(function() {
-      var a = $("#a").val();
-      var b = $("#b").val();
+  // var getLocationVal =  window.setInterval("getLocation()", 1500 );
+  // var getStepsVal =    window.setInterval("getSteps()", 1500 );
+  // clearInterval(getLocationVal);
+  // clearInterval(getStepsVal);
 
-      $.get("/add/", {
-        'a': a,
-        'b': b
-      }, function(ret) {
-        $('#result').html(ret)
-      })
-    });
-
-  });
-getSteps();
-  var getLocationVal =  window.setInterval("getLocation()", 1500 );
-  var getStepsVal =    window.setInterval("getSteps()", 1500 );
-  clearInterval(getLocationVal);
-  clearInterval(getStepsVal);
+  // html5 get location-GPS
+  var x = document.getElementById("demo");
 
   function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition);
     } else {
-      x.innerHTML = "该浏览器不支持获取地理位置。";
+      // x.innerHTML = "该浏览器不支持获取地理位置。";
+      alert("该浏览器不支持获取地理位置。");
     }
   }
 
   function showPosition(position) {
+    var identity = $('input[name="identity"]:checked').val();
+    var urlVal = "/home/computeGPS/";
 
-    x.innerHTML = "纬度: " + position.coords.latitude +
-      "<br>经度: " + position.coords.longitude;
-
-      var identity = $('input[name="identity"]:checked').val();
-      var urlVal = "/home/computeGPS/";
-
-      $.ajax({
+    $.ajax({
         url: "/home/computeGPS/",
         type: 'POST',
         dataType: 'json',
-        data: {"id": "4", "nickname": "A1", "longitude": position.coords.longitude, "latitude": position.coords.latitude}
+        data: {
+          "id": "4",
+          "nickname": "A1",
+          "longitude": position.coords.longitude,
+          "latitude": position.coords.latitude
+        }
       })
       .done(function(resp) {
-        console.log(resp);
-        if (resp.status ) {
-          console.log(resp );
-        }
-        else{
+        // console.log(resp);
+        if (resp.status) {
+          console.log(resp);
+        } else {
           alert(resp.message);
         }
       })
@@ -87,18 +67,19 @@ getSteps();
 
 
   function getSteps() {
-      $.ajax({
+    $.ajax({
         url: "/home/getStepFrenquency/",
         type: 'POST',
         dataType: 'json',
-        data: {"id": "5" }
+        data: {
+          "id": "5"
+        } //這裏和 indexA 相同
       })
       .done(function(resp) {
-        console.log(resp);
-        if (resp.status ) {
-          console.log(resp );
-        }
-        else{
+        // console.log(resp);
+        if (resp.status) {
+          console.log(resp);
+        } else {
           alert(resp.message);
         }
       })

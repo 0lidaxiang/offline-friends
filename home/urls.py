@@ -7,6 +7,7 @@ from home.view.index import  *
 # from home.view.computer import  *
 
 urlpatterns = [
+    url('^index/$', index),
     url('^indexA/$', indexA),
     url('^indexB/$', indexB),
     url('^aboutUs/$', aboutUs),
