@@ -14,7 +14,8 @@ DROP TABLE user;
 DELETE FROM user where id = 3;
 
 INSERT INTO user  (nickname, age, gender, city, location, longitude, latitude, stepFrequency, heartBeat)    VALUES  ( "A2", "22", "0", "taipei", "daan", "","", "", "" );
-INSERT INTO user  (nickname, age, gender, city, location, longitude, latitude, stepFrequency, heartBeat, stepStartTime)    VALUES  ( "A1", "24", "1", "taipei", "daan", "","", "", "" , ""), ( "A2", "22", "0", "taipei", "daan", "","", "", "" , "");
+
+INSERT INTO user  (nickname, age, gender, city, location, longitude, latitude, stepFrequency, heartBeat, stepStartTime, hobby)    VALUES  ( "A1", "24", "1", "taipei", "daan", "","", "", "" , "", "read novel, draw"), ( "A2", "22", "0", "taipei", "daan", "","", "", "" , "", "read novel");
 
 UPDATE user SET gender='1' WHERE id= 4 ;
 UPDATE user SET stepFrequency='1' WHERE nickname="A1";

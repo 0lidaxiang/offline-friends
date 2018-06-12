@@ -2,9 +2,9 @@
 # -*- coding: UTF-8 -*-
 from django.conf.urls import include, url
 from django.contrib import admin
-from home.view.index import  *
+from stepFrequency.view.index import  *
 
 urlpatterns = [
-    url('^index/$', index),
-    url('^aboutUs/$', aboutUs)
+    url('^getStepFrequency/$', getStepFrequency),
+    url('^sendStepFrequency/$', sendStepFrequency),
 ]

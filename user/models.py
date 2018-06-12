@@ -20,16 +20,17 @@ from time import localtime,strftime
 class User(models.Model):
     id = models.AutoField(primary_key=True)
     nickname = models.CharField(db_column='nickname', max_length=100 )
-    age = models.IntegerField(max_length=100 )
+    age = models.IntegerField( )
     gender = models.IntegerField(db_column='gender' )
     city = models.CharField(max_length=200 )
     location = models.CharField(max_length=200 )
 
-    longitude = models.DecimalField(max_digits = 10, decimal_places=2 )
-    latitude = models.DecimalField(max_digits = 10, decimal_places=2 )
-    stepFrequency = models.DecimalField(max_digits = 6, decimal_places=2 )
-    heartBeat = models.DecimalField(max_digits = 5, decimal_places=2 )
-    stepStartTime = models.DateTimeField() .
+    longitude = models.CharField(max_length=50 )
+    latitude = models.CharField(max_length=50  )
+    stepFrequency = models.IntegerField(  )
+    heartBeat = models.IntegerField(  )
+    stepStartTime = models.DateTimeField()
+    hobby = models.CharField(max_length=200 )
 
     class Meta:
         managed = False
@@ -71,33 +72,73 @@ class User(models.Model):
         try:
             obj = self.objects.get(id = userIdArg)
             if returnArg == "id":
-                return True, 110000, obj.id
+                return True, obj.id
             elif returnArg == "nickname":
-                return True, 110000, obj.nickname
+                return True, obj.nickname
             elif returnArg == "age":
-                return True, 110000, obj.age
+                return True, obj.age
             elif returnArg == "city":
-                return True, 110000, obj.city
+                return True, obj.city
             elif returnArg == "location":
-                return True, 110000, obj.location
+                return True, obj.location
             elif returnArg == "longitude":
-                return True, 110000, obj.longitude
+                return True, obj.longitude 
             elif returnArg == "latitude":
-                return True, 110000, obj.latitude
+                return True, obj.latitude
             elif returnArg == "stepFrequency":
-                return True, 110000, obj.stepFrequency
+                return True, obj.stepFrequency
             elif returnArg == "heartBeat":
-                return True, 110000, obj.heartBeat
+                return True, obj.heartBeat
             elif returnArg == "stepStartTime":
-                return True, 110000, obj.stepStartTime
+                return True, obj.stepStartTime
             elif returnArg == "all":
-                return True, 110000, obj
+                return True, obj
             else:
-                return False, 110001, "  user 表中不存在该属性，returnArg 错误"
+                return False, "  user 表中不存在该属性，returnArg 错误"
         except self.DoesNotExist:
-                return False, 110002, "  user 表不存在该数据"
+                return False, "  user 表不存在该数据"
         except Exception as e:
-                return False, 110003, str(e)
+                return False, str(e)
+
+    @classmethod
+    def modifyLL(self, idArg, longitudeArg, latitudeArg):
+        print("modifyLL: ", type(longitudeArg), longitudeArg,latitudeArg)
+
+        try:
+            obj = self.objects.get(id=idArg)
+            obj.longitude = float(longitudeArg);
+            obj.latitude = float(latitudeArg);
+
+
+            obj.save()
+            return True, ""
+        except self.DoesNotExist:
+            return False, "modify 读取 user 表错误"
+        except Exception as e:
+            print(str(e))
+            return False, str(e)
+
+    @classmethod
+    def modifyObj(self, idArg, argName, value):
+        try:
+            obj = self.objects.get(id=idArg)
+            if argName == "stepFrequency":
+                obj.stepFrequency = value;
+                obj.save()
+            elif argName == "heartBeat":
+                obj.heartBeat = value;
+                obj.save()
+            elif argName == "stepStartTime":
+                obj.stepStartTime = value;
+                obj.save()
+            else:
+                return False, "modify 读取 user 表错误"
+            return True, ""
+        except self.DoesNotExist:
+            return False, "modify 读取 user 表错误"
+        except Exception as e:
+            print(str(e))
+            return False, str(e)
 
     # @classmethod
     # def add(self, userIdArg, phoneArg):
@@ -108,27 +149,8 @@ class User(models.Model):
     #         return True,110100, idArg
     #     except Exception as e:
     #         return False,110101, str(e)
-    #
-    # @classmethod
-    # def modifyObj(self, idArg, argName, value):
-    #     try:
-    #         obj = self.objects.get(id=idArg)
-    #         if argName == "userGradeId":
-    #             obj.userGradeId = value;
-    #             obj.save()
-    #         elif argName == "phone":
-    #             obj.phone = value;
-    #             obj.save()
-    #         else:
-    #             return False, 110301, "modify 读取 user 表错误"
-    #
-    #         return True,110300, ""
-    #     except self.DoesNotExist:
-    #         return False, 110302, "modify 读取 user 表错误"
-    #     except Exception as e:
-    #         print(str(e))
-    #         return False,110303, str(e)
-    #
+
+
     # @classmethod
     # def deleteObj(self, value):
     #     try:
