@@ -82,7 +82,7 @@ class User(models.Model):
             elif returnArg == "location":
                 return True, obj.location
             elif returnArg == "longitude":
-                return True, obj.longitude 
+                return True, obj.longitude
             elif returnArg == "latitude":
                 return True, obj.latitude
             elif returnArg == "stepFrequency":
@@ -99,6 +99,20 @@ class User(models.Model):
                 return False, "  user 表不存在该数据"
         except Exception as e:
                 return False, str(e)
+
+    @classmethod
+    def getAllUserGPS(self, idArg):
+        try:
+            status, cityArg = User.getValueByUserId(idArg, "city")
+            # print(myGPS.longitude, myGPS.latitude)
+            objs = User.objects.filter(city = cityArg).all()
+
+            return True, objs
+        except self.DoesNotExist:
+                return False, "  user 表不存在该数据"
+        except Exception as e:
+            print(str(e))
+            return False, str(e)
 
     @classmethod
     def modifyLL(self, idArg, longitudeArg, latitudeArg):

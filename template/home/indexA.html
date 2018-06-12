@@ -18,11 +18,11 @@
 <!-- <script src="/static/js/index.js" type="text/javascript"></script> -->
 
 <script type="text/javascript">
-window.setInterval("setLocation()", 2000);
-window.setInterval("setSteps()", 2500);
+// window.setInterval("setLocation()", 2000);
+// window.setInterval("setSteps()", 2500);
 
 window.setInterval("getLocation()", 2000);
-window.setInterval("getSteps()", 2500);
+window.setInterval("getSteps()", 2000);
 
 // html5 get location-GPS
 var x = document.getElementById("demo");
@@ -94,7 +94,7 @@ function setSteps() {
 // html5 get location-GPS
 function getLocation() {
   $.ajax({
-      url: "/gps/getGPS/",
+      url: "/gps/getPeople/",
       type: 'POST',
       dataType: 'json',
       data: {

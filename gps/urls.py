@@ -5,6 +5,7 @@ from django.contrib import admin
 from gps.view.index import  *
 
 urlpatterns = [
+    url('^getPeople/$', getPeople),
     url('^getGPS/$', getGPS),
     url('^sendGPS/$', sendGPS),
 ]
