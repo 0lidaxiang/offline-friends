@@ -15,6 +15,14 @@ def index(request):
     context	= {}
     return render(request, 'home/index.html', context)
 
+def index1(request):
+    context	= {}
+    return render(request, 'home/index1.html', context)
+
+def index2(request):
+    context	= {}
+    return render(request, 'home/index2.html', context)
+
 def indexA(request):
     context	= {}
     return render(request, 'home/indexA.html', context)

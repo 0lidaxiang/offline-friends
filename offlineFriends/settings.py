@@ -25,7 +25,7 @@ SECRET_KEY = 'fslts&(@6p&10f3t7x_gvul%v&m5es7=67l3ir!0s-a0b^#!*t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.146','192.168.1.180', 'localhost', '127.0.0.1', '47.75.51.27', '192.168.100.8', 'cds.commentbook.org']
+ALLOWED_HOSTS = ['192.168.1.146','192.168.1.180', 'localhost', '127.0.0.1', '47.75.51.27', '192.168.100.8', 'cds.commentbook.org', 'www.baidu.com']
 
 # Application definition
 
