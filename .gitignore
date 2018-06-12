@@ -1,0 +1,8 @@
+#Ignore pyc files
+
+#Compiler need
+*.pyc
+
+# 'python manage.py collectstatic' command results
+[Dd]jangoStatic/
+[Mm]igrations/

@@ -1,0 +1,141 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+from django.db import models
+from time import localtime,strftime
+
+  # `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  # `nickname` VARCHAR(100) NULL,
+  # `age` INT UNSIGNED NULL,
+  # `gender` INT UNSIGNED NULL,
+  # `city` VARCHAR(200) NULL,
+  # `location` VARCHAR(200) NULL,
+  #
+  # `longitude` DECIMAL NULL,
+  # `latitude` DECIMAL NULL,
+  # `stepFrequency` DECIMAL NULL,
+  # `heartBeat` DECIMAL NULL,
+  # `stepStartTime` DATETIME NULL,
+
+class User(models.Model):
+    id = models.AutoField(primary_key=True)
+    nickname = models.CharField(db_column='nickname', max_length=100 )
+    age = models.IntegerField(max_length=100 )
+    gender = models.IntegerField(db_column='gender' )
+    city = models.CharField(max_length=200 )
+    location = models.CharField(max_length=200 )
+
+    longitude = models.DecimalField(max_digits = 10, decimal_places=2 )
+    latitude = models.DecimalField(max_digits = 10, decimal_places=2 )
+    stepFrequency = models.DecimalField(max_digits = 6, decimal_places=2 )
+    heartBeat = models.DecimalField(max_digits = 5, decimal_places=2 )
+    stepStartTime = models.DateTimeField() .
+
+    class Meta:
+        managed = False
+        db_table = 'user'
+
+    @classmethod
+    def getValueByNickname(self, nicknameArg, returnArg):
+        try:
+            obj = self.objects.get(nickname = nicknameArg)
+            if returnArg == "id":
+                return True, 110000, obj.id
+            elif returnArg == "nickname":
+                return True, 110000, obj.nickname
+            elif returnArg == "age":
+                return True, 110000, obj.age
+            elif returnArg == "city":
+                return True, 110000, obj.city
+            elif returnArg == "location":
+                return True, 110000, obj.location
+            elif returnArg == "longitude":
+                return True, 110000, obj.longitude
+            elif returnArg == "latitude":
+                return True, 110000, obj.latitude
+            elif returnArg == "stepFrequency":
+                return True, 110000, obj.stepFrequency
+            elif returnArg == "heartBeat":
+                return True, 110000, obj.heartBeat
+            elif returnArg == "stepStartTime":
+                return True, 110000, obj.stepStartTime
+            else:
+                return False, 110001, "  user 表中不存在该属性，returnArg 错误"
+        except self.DoesNotExist:
+                return False, 110002, "  user 表不存在该数据"
+        except Exception as e:
+                return False, 110003, str(e)
+
+    @classmethod
+    def getValueByUserId(self, userIdArg, returnArg):
+        try:
+            obj = self.objects.get(id = userIdArg)
+            if returnArg == "id":
+                return True, 110000, obj.id
+            elif returnArg == "nickname":
+                return True, 110000, obj.nickname
+            elif returnArg == "age":
+                return True, 110000, obj.age
+            elif returnArg == "city":
+                return True, 110000, obj.city
+            elif returnArg == "location":
+                return True, 110000, obj.location
+            elif returnArg == "longitude":
+                return True, 110000, obj.longitude
+            elif returnArg == "latitude":
+                return True, 110000, obj.latitude
+            elif returnArg == "stepFrequency":
+                return True, 110000, obj.stepFrequency
+            elif returnArg == "heartBeat":
+                return True, 110000, obj.heartBeat
+            elif returnArg == "stepStartTime":
+                return True, 110000, obj.stepStartTime
+            elif returnArg == "all":
+                return True, 110000, obj
+            else:
+                return False, 110001, "  user 表中不存在该属性，returnArg 错误"
+        except self.DoesNotExist:
+                return False, 110002, "  user 表不存在该数据"
+        except Exception as e:
+                return False, 110003, str(e)
+
+    # @classmethod
+    # def add(self, userIdArg, phoneArg):
+    #     userGraderIdArg = ""
+    #     try:
+    #         obj = self(userId = userIdArg, userGraderId = userGraderIdArg, phone= phoneArg)
+    #         obj.save()
+    #         return True,110100, idArg
+    #     except Exception as e:
+    #         return False,110101, str(e)
+    #
+    # @classmethod
+    # def modifyObj(self, idArg, argName, value):
+    #     try:
+    #         obj = self.objects.get(id=idArg)
+    #         if argName == "userGradeId":
+    #             obj.userGradeId = value;
+    #             obj.save()
+    #         elif argName == "phone":
+    #             obj.phone = value;
+    #             obj.save()
+    #         else:
+    #             return False, 110301, "modify 读取 user 表错误"
+    #
+    #         return True,110300, ""
+    #     except self.DoesNotExist:
+    #         return False, 110302, "modify 读取 user 表错误"
+    #     except Exception as e:
+    #         print(str(e))
+    #         return False,110303, str(e)
+    #
+    # @classmethod
+    # def deleteObj(self, value):
+    #     try:
+    #         obj = self.objects.get(id = value)
+    #         obj.delete()
+    #         return True,110200, ""
+    #     except self.DoesNotExist:
+    #         return False, 110201, "deleteuser by | " + argName + " : " + value + " | 表错误"
+    #     except Exception as e:
+    #         return False, 110202, str(e)
