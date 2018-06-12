@@ -7,7 +7,7 @@
 </head>
 
 <body>
-
+{% csrf_token %}
   穿戴式設備
   <br> 線下
 
@@ -21,8 +21,8 @@
 window.setInterval("setLocation()", 2000);
 window.setInterval("setSteps()", 2500);
 
-window.setInterval("getLocation()", 5000);
-window.setInterval("getSteps()", 5000);
+window.setInterval("getLocation()", 3000);
+window.setInterval("getSteps()", 3000);
 
 // html5 get location-GPS
 var x = document.getElementById("demo");
