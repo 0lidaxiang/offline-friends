@@ -56,19 +56,21 @@ def getStepFrequency(request):
 
     return JsonResponse(res_dict)
 
-# def sendStepFrenquency(request):
-#
-#      id = request.POST['id']
-#      url_str = 'https://mcs.mediatek.com/public/devices/DjQvVy1x/datachannels/' + str(id) + '?locale=zh-CN'
-#      req = requests.get(url_str)
-#      req_text = req.text
-#
-#      soup = BeautifulSoup(req_text, 'html.parser')
-#      # print(soup.prettify(), "\n ssssssssss \n")
-#      now_step_num = int(soup.find('div', attrs={'class':'CjCuiMrOmd5M'}).text)
-#      print( type(now_step_num), now_step_num  )
-#
-#      res_dict = {'status': True, 'message': now_step_num }
-#
-#      # return JsonResponse(res_dict, safe=False)
-#      return JsonResponse(res_dict)
+
+
+def sendStepFrenquencyNow(request):
+
+     id = request.POST['id']
+     url_str = 'https://mcs.mediatek.com/public/devices/DjQvVy1x/datachannels/' + str(id) + '?locale=zh-CN'
+     req = requests.get(url_str)
+     req_text = req.text
+
+     soup = BeautifulSoup(req_text, 'html.parser')
+     # print(soup.prettify(), "\n ssssssssss \n")
+     now_step_num = int(soup.find('div', attrs={'class':'CjCuiMrOmd5M'}).text)
+     print( type(now_step_num), now_step_num  )
+
+     res_dict = {'status': True, 'message': now_step_num }
+
+     # return JsonResponse(res_dict, safe=False)
+     return JsonResponse(res_dict)

@@ -25,7 +25,7 @@ SECRET_KEY = 'fslts&(@6p&10f3t7x_gvul%v&m5es7=67l3ir!0s-a0b^#!*t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.146','192.168.1.180', 'localhost', '127.0.0.1', '47.75.51.27']
+ALLOWED_HOSTS = ['192.168.1.146','192.168.1.180', 'localhost', '127.0.0.1', '47.75.51.27', '192.168.100.8', 'cds.commentbook.org']
 
 # Application definition
 
@@ -40,13 +40,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.contrib.auth.middleware.AuthenticationMiddleware',
+    # 'django.contrib.messages.middleware.MessageMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'offlineFriends.urls'
