@@ -1,6 +1,6 @@
 #Ignore pyc files
 
-#Compiler need
+__pycache__
 *.pyc
 
 # 'python manage.py collectstatic' command results

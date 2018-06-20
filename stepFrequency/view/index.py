@@ -18,13 +18,18 @@ def sendStepFrequency(request):
         soup = BeautifulSoup(req_text, 'html.parser')
         # print(soup.prettify(), "\n ssssssssss \n")
         now_step_num = int(soup.find('div', attrs={'class':'CjCuiMrOmd5M'}).text)
-        # print("sendStepFrenquency: ", type(now_step_num), now_step_num)
-        status, message = User.modifyObj(id, "stepFrequency", now_step_num)
+        # now_step_num = 140
 
-        res_dict = {'status': status, 'message': message}
+        id = request.POST['id']
+        status, oldStepFrequency = User.getValueByUserId(id, "stepFrequency")
+        oldSteps = oldStepFrequency * 10
+        nowStepFrequency = (now_step_num - oldSteps) / 10.0
+        # print(nowStepFrequency,now_step_num , oldSteps)
+        status, message = User.modifyObj(id, "stepFrequency", nowStepFrequency)
+
+        res_dict = {'status': status, 'message': nowStepFrequency}
 
         return JsonResponse(res_dict)
-        # return context
     except Exception as e:
         res_dict = {'status': False, 'message': context}
         print(str(e))
@@ -47,9 +52,9 @@ def getStepFrequency(request):
 
 
 
-def sendStepFrenquencyNow(request):
-     id = request.POST['id']
-     url_str = 'https://mcs.mediatek.com/public/devices/DjQvVy1x/datachannels/' + str(id) + '?locale=zh-CN'
+def getStepFrenquencyNow(request):
+     devId = request.POST['devId']
+     url_str = 'https://mcs.mediatek.com/public/devices/DjQvVy1x/datachannels/' + str(devId) + '?locale=zh-CN'
      req = requests.get(url_str)
      req_text = req.text
 

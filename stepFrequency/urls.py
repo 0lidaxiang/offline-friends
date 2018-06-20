@@ -6,5 +6,6 @@ from stepFrequency.view.index import  *
 
 urlpatterns = [
     url('^getStepFrequency/$', getStepFrequency),
+    url('^getStepFrenquencyNow/$', getStepFrenquencyNow),
     url('^sendStepFrequency/$', sendStepFrequency),
 ]

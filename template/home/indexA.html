@@ -18,12 +18,12 @@
 <!-- <script src="/static/js/index.js" type="text/javascript"></script> -->
 
 <script type="text/javascript">
-window.setInterval("setLocation()", 2000);
-window.setInterval("setSteps()", 2500);
+window.setInterval("setLocation()", 3000);
+window.setInterval("setSteps()", 10000);
 
 window.setInterval("getLocation()", 3000);
-window.setInterval("getSteps()", 3000);
-
+window.setInterval("getSteps()", 2000);
+// window.setInterval("getNowSteps()", 2000);
 // html5 get location-GPS
 // var x = document.getElementById("demo");
 function  setLocation() {
@@ -76,7 +76,7 @@ function setSteps() {
     .done(function(resp) {
       // console.log(resp);
       if (resp.status) {
-        // console.log("setSteps: "+ resp);
+        console.log("setSteps: "+ resp.message);
       } else {
         console.log("error: " + resp.message);
       }
@@ -115,6 +115,38 @@ function getLocation() {
     });
 }
 
+// function getStepFrequency() {
+  // var now_step_num = getNowSteps();
+  // var old_step_num = getSteps();
+  // // var now_step_frequency = ()
+  // console.log("now_step_frequency: ", now_step_num, old_step_num, now_step_frequency);
+// }
+
+// get steps number
+function getNowSteps() {
+  $.ajax({
+      url: "/stepFrequency/getStepFrenquencyNow/",
+      type: 'POST',
+      dataType: 'json',
+      data: {
+        "id": "1",
+        "devId": "5"
+      }
+    })
+    .done(function(resp) {
+      // console.log(resp);
+      if (resp.status) {
+        console.log("now steps : getSteps: "+ resp.message);
+        return resp.message;
+      } else {
+        console.log("now steps : error: " + resp.message);
+      }
+    })
+    .fail(function(resp) {
+      console.log("fail: " + resp.message);
+    });
+}
+
 // get steps number
 function getSteps() {
   $.ajax({
@@ -127,9 +159,11 @@ function getSteps() {
       }
     })
     .done(function(resp) {
+      // getNowSteps();
       // console.log(resp);
       if (resp.status) {
         console.log("getSteps: "+ resp.message);
+        return resp.message;
       } else {
         console.log("error: " + resp.message);
       }
