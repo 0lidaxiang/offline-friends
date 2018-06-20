@@ -1,21 +1,7 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 from django.db import models
 from time import localtime,strftime
-
-  # `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  # `nickname` VARCHAR(100) NULL,
-  # `age` INT UNSIGNED NULL,
-  # `gender` INT UNSIGNED NULL,
-  # `city` VARCHAR(200) NULL,
-  # `location` VARCHAR(200) NULL,
-  #
-  # `longitude` DECIMAL NULL,
-  # `latitude` DECIMAL NULL,
-  # `stepFrequency` DECIMAL NULL,
-  # `heartBeat` DECIMAL NULL,
-  # `stepStartTime` DATETIME NULL,
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
@@ -93,6 +79,8 @@ class User(models.Model):
                 return True, obj.stepStartTime
             elif returnArg == "all":
                 return True, obj
+            elif returnArg == "allExceptId":
+                return True, obj.filter(~Q(id = userIdArg))
             else:
                 return False, "  user 表中不存在该属性，returnArg 错误"
         except self.DoesNotExist:
@@ -104,7 +92,6 @@ class User(models.Model):
     def getAllUserGPS(self, idArg):
         try:
             status, cityArg = User.getValueByUserId(idArg, "city")
-            # print(myGPS.longitude, myGPS.latitude)
             objs = User.objects.filter(city = cityArg).all()
 
             return True, objs
@@ -116,8 +103,6 @@ class User(models.Model):
 
     @classmethod
     def modifyLL(self, idArg, longitudeArg, latitudeArg):
-        print("modifyLL: ", type(longitudeArg), longitudeArg,latitudeArg)
-
         try:
             obj = self.objects.get(id=idArg)
             obj.longitude = float(longitudeArg);

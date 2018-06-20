@@ -103,12 +103,12 @@ function getLocation() {
       }
     })
     .done(function(resp) {
-      // console.log(resp);
-      if (resp.status) {
-        console.log("getGPS: "+ resp.message.longitude + ", " + + resp.message.latitude);
-      } else {
-        console.log("error: " + resp.message);
-      }
+      console.log(resp.message);
+      // if (resp.status) {
+      //   console.log("getGPS: "+ resp.message.longitude + ", " + + resp.message.latitude);
+      // } else {
+      //   console.log("error: " + resp.message);
+      // }
     })
     .fail(function(resp) {
       console.log("fail: " + resp.message);
