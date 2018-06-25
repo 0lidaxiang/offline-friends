@@ -8,7 +8,7 @@ from home.view.index import  *
 
 urlpatterns = [
     url('^index/$', index),
-    url('^index1/$', index1),
+    # url('^index1/$', index1),
     url('^index2/$', index2),
     url('^indexA/$', indexA),
     url('^indexB/$', indexB),
