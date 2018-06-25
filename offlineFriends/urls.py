@@ -20,6 +20,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
 from home.view.index import *
+from django.views.generic.base import RedirectView
+
+favicon_view = RedirectView.as_view(url='/static/favicon.ico', permanent=True)
 
 urlpatterns = [
     # path('admin/', admin.site.urls),
@@ -27,4 +30,6 @@ urlpatterns = [
     url('^heartBeat/', include('heartBeat.urls')),
     url('^gps/', include('gps.urls')),
     url('^stepFrequency/', include('stepFrequency.urls')),
+    url(r'^favicon\.ico$', favicon_view),
+
 ]
