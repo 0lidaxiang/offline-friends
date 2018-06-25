@@ -61,7 +61,7 @@ def haversine(lon1, lat1, lon2, lat2):
     c = 2 * asin(sqrt(a))
     # 地球平均半径，单位为公里
     r = 6356.752
-    
+
     return c * r * 1000
 
 # 获得最近的人的列表以及他们的相关 data
@@ -84,16 +84,17 @@ def getPeople(request):
         # 循环计算当前城市里距离用户最近的其他用户 data ，距离、gps、昵称、性别
         for obj in userObjs:
             distance = haversine(float(myGPS.longitude), float(myGPS.latitude), float(obj.longitude), float(obj.latitude),)
-            neighbor["longitude"] = obj.longitude
-            neighbor["latitude"] = obj.latitude
-            neighbor["nickname"] = obj.nickname
-            neighbor["age"] = obj.age
-            neighbor["gender"] = obj.gender
-            neighbor["location"] = obj.location
-            neighbor["stepFrequency"] = obj.stepFrequency
-            neighbor["hobby"] = obj.hobby
-            neighbor["distance"] = distance
-            neighbors.append(neighbor)
+            if distance < 5000:
+                neighbor["longitude"] = obj.longitude
+                neighbor["latitude"] = obj.latitude
+                neighbor["nickname"] = obj.nickname
+                neighbor["age"] = obj.age
+                neighbor["gender"] = obj.gender
+                neighbor["location"] = obj.location
+                neighbor["stepFrequency"] = obj.stepFrequency
+                neighbor["hobby"] = obj.hobby
+                neighbor["distance"] = distance
+                neighbors.append(neighbor)
 
         message = {"myGPS" : {"longitude": myGPS.longitude, "latitude": myGPS.latitude}, "neighbors": neighbors}
         # print("message : ", message)
