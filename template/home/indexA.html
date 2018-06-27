@@ -175,7 +175,7 @@ function setSteps() {
 }
 
 
-var oldNeighbors = new Array();;
+
 // html5 get location-GPS
 function getLocation() {
   $.ajax({
@@ -190,6 +190,8 @@ function getLocation() {
     .done(function(resp) {
       // console.log(resp.message);
       // var mess = resp.message;
+      var oldNeighbors = new Array();;
+      document.getElementById("insert_tbody").innerHTML = "";
       var myGPS_Lon = resp.message.myGPS.longitude;
       var myGPS_Lat = resp.message.myGPS.latitude;
 
